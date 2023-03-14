@@ -1,0 +1,11 @@
+README.md
+setup.py
+paquete_marcos_gonzalez/__init__.py
+paquete_marcos_gonzalez/cliente.py
+paquete_marcos_gonzalez/funciones_comprar.py
+paquete_marcos_gonzalez/ingreso_entrega_1.py
+paquete_marcos_gonzalez/login_entrega_1.py
+paquete_marcos_gonzalez.egg-info/PKG-INFO
+paquete_marcos_gonzalez.egg-info/SOURCES.txt
+paquete_marcos_gonzalez.egg-info/dependency_links.txt
+paquete_marcos_gonzalez.egg-info/top_level.txt
