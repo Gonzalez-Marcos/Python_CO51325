@@ -1,0 +1,39 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<link href="{% static 'css/buscar.css' %}" rel="stylesheet" />
+
+<form action="{% url 'buscar' %}" method="GET" class="form_busq">
+    <section class="sec_busq">
+        
+        <h3 class="title">Buscar comisión</h3>
+        
+        <input class="busq" type="number" name="comision">
+
+        <button type="submit" class="btn_busq"> Buscar </button>
+
+    </section>
+
+    {% if cursos %}
+
+    <p class="p_busq">Buscando comisión: {{comision}}</p>
+    
+    <ul class="ul_busq">
+        {% for curso in cursos%}
+
+        <li class="li_busq">Curso: {{curso.nombre}}</li>
+        <li class="li_busq">Comision: {{curso.comision}}</li>
+
+        {% endfor %}
+
+    </ul>
+    {% else %}
+        {% if comision == "" %}
+        <p class="p_busq">No hay datos en esta descripción</p>
+        {% endif %}
+    {% endif %}
+
+</form>
+{% endblock %}

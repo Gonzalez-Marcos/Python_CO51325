@@ -1,0 +1,30 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+<body>
+    <form action="{% url 'profesores' %}" method="POST" class="form_curso"> {% csrf_token %}
+        <section class="sec_cur">
+    
+            <h3 class="title">Profesores</h3>
+            {% if formulario.errors %}
+                <p style="color: red;"> Algo está mal</p>
+            {% endif %}
+    
+            <table>
+    
+                {{  formulario.as_table  }}
+    
+            </table>
+    
+            <button type="submit" class="btn_cur"> Cargar </button>
+    
+        </section>
+    
+    </form>
+    {% endblock %}
+</body>
+</html>

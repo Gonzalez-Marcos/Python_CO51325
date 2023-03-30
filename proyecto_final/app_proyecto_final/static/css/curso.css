@@ -1,0 +1,82 @@
+.form_curso{
+    text-align: center;
+    margin: 50px;
+}
+
+.sec_cur{
+
+    display: flex;
+    flex-direction: column;
+    /* align-content: center; */
+    align-items: center;
+}
+
+.title{
+    margin: 30px 10px;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.lab_cur{
+    margin-top: 50px;
+    font-size: 1.5rem;
+    width: 80%;
+}
+
+.cur{
+    width: 70%;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin-top: 10px;
+    height: 40px;
+}
+
+.btn_cur{
+
+    position: relative;
+    border: none;
+    width: 10%;
+    height: 40px;
+    margin-top: 15px;
+    border-radius: 8px;
+    background: #415a77;
+    color: #fff;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+    right: -30px;
+
+}
+#padre{
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+/* @media (min-width: 375px) {
+    
+    .btn_cur{
+        right: 104px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    
+    .btn_cur{
+        right: 155px;
+        height: 30px;
+    }
+  }
+
+@media (min-width: 1024px) {
+    
+    .btn_cur{
+        right: 195px;
+        height: 30px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    
+    .btn_cur{
+        right: 256px;
+        height: 30px;
+    }
+  } */

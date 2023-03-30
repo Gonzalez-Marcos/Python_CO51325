@@ -1,0 +1,39 @@
+.form_busq{
+    text-align: center;
+}
+
+.busq{
+    width: 70%;
+    height: 40px;
+    border: 2px solid rgb(83, 82, 82);
+    border-radius: 8px;
+    margin: 10px auto;
+}
+
+.btn_busq{
+    /* border: 2px solid black; */
+    border: none;
+    height: 40px;
+    border-radius: 8px;
+    background: #415a77;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+}
+
+.p_busq{
+    margin-top: 10px auto;
+    font-size: 1.2rem;
+}
+
+.li_busq{
+    text-align: center;
+    list-style: none;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+#padre{
+    color: #fff;
+    font-size: 1.5rem;
+}
