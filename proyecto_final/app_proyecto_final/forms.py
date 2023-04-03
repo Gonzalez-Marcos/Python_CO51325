@@ -28,6 +28,6 @@ class EntregableFormulario(forms.Form):
 
     nombre = forms.CharField(max_length=50)
 
-    fecha_entrega = forms.DateField()
+    fecha_entrega = forms.DateField(help_text= "Formato de la fecha debe ser: aaaa/mm/dd")
 
     entregado = forms.BooleanField()

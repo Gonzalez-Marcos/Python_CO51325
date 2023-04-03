@@ -21,18 +21,18 @@
     <p class="p_busq">Buscando comisión: {{comision}}</p>
     
     <ul class="ul_busq">
-        {% for curso in cursos%}
+    {% for curso in cursos%}
 
         <li class="li_busq">Curso: {{curso.nombre}}</li>
         <li class="li_busq">Comision: {{curso.comision}}</li>
 
-        {% endfor %}
+    {% endfor %}
 
     </ul>
     {% else %}
-        {% if comision == "" %}
-        <p class="p_busq">No hay datos en esta descripción</p>
-        {% endif %}
+        
+        <p class="p_busq">No hay datos de esta comisión</p>
+        
     {% endif %}
 
 </form>
