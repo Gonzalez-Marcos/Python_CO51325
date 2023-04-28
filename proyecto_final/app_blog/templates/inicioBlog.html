@@ -1,0 +1,62 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block header %}
+
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+
+{% endblock %}
+
+{% block contenidoQueCambia %}
+<!--Main layout-->
+<main class="my-5">
+  <div class="container">
+    <!--Section: Content-->
+    <section class="text-center">
+      <h4 class="mb-5"><strong>Bienvenidos a nuestro BLOG</strong></h4>
+
+      <div class="row">
+        {% for post in posts%}
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="card">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="{{ post.imagen.url }}" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Post title</h5>
+              <p class="card-text">
+                {{ post.text }}
+              </p>
+              <a href="{% url 'detalleBlog' post.id %}" class="btn btn-primary">Ver</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    <!--Section: Content-->
+
+    <!-- Pagination -->
+    <nav class="my-4" aria-label="...">
+      <ul class="pagination pagination-circle justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</main>
+<!--Main layout-->
+{% endblock %}

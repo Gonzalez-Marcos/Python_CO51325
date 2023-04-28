@@ -87,6 +87,9 @@ body {
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  position: relative;
+  padding-bottom: 3em;
+  min-height: 100vh;
 }
 
 hr {
@@ -409,6 +412,12 @@ legend {
   font-size: calc(1.275rem + 0.3vw);
   line-height: inherit;
 }
+
+footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 @media (min-width: 1200px) {
   legend {
     font-size: 1.5rem;
@@ -599,7 +608,7 @@ progress {
 }
 
 .img-fluid {
-  max-width: 50%;
+  max-width: 20%;
   /* height: auto; */
 }
 
@@ -638,31 +647,32 @@ progress {
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
+  margin-top: 50px;
 }
 
 @media (min-width: 576px) {
   .container-sm, .container {
-    max-width: 540px;
+    max-width: 100%;
   }
 }
 @media (min-width: 768px) {
   .container-md, .container-sm, .container {
-    max-width: 720px;
+    max-width: 100%;
   }
 }
 @media (min-width: 992px) {
   .container-lg, .container-md, .container-sm, .container {
-    max-width: 960px;
+    max-width: 100%;
   }
 }
 @media (min-width: 1200px) {
   .container-xl, .container-lg, .container-md, .container-sm, .container {
-    max-width: 1140px;
+    max-width: 100%;
   }
 }
 @media (min-width: 1400px) {
   .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
-    max-width: 1320px;
+    max-width: 100%;
   }
 }
 .row {
@@ -673,6 +683,7 @@ progress {
   margin-top: calc(-1 * var(--bs-gutter-y));
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
+  /* margin-bottom: 30px;ç */
 }
 .row > * {
   flex-shrink: 0;
@@ -3060,8 +3071,8 @@ textarea.form-control-lg {
 
 .btn-secondary {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  /* background-color: #6c757d; */
+  /* border-color: #6c757d; */
 }
 .btn-secondary:hover {
   color: #fff;
@@ -3557,7 +3568,7 @@ textarea.form-control-lg {
   position: absolute;
   z-index: 1000;
   display: none;
-  min-width: 10rem;
+  min-width: 9.5rem;
   padding: 0.5rem 0;
   margin: 0;
   font-size: 1rem;
@@ -11292,3 +11303,6 @@ textarea.form-control-lg {
   background-position: center;
   background-size: cover;
 }
+
+
+

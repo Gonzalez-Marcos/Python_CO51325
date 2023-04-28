@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
 # ACÁ SE CREAN LAS TABLAS PARA LA DB SQLITE
 
 # Create your models here.
@@ -34,3 +36,11 @@ class Entregable(models.Model):
 
     def __str__(self):
         return f"{self.nombre} - {self.fecha_entrega}"  
+    
+class Avatar(models.Model):
+
+    imagen = models.ImageField(upload_to = "Avatars")
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='proyecto_final_Avatars')
+
+
+    

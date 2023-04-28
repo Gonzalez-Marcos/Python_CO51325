@@ -1,0 +1,68 @@
+
+   
+ .imagen_inicio{
+    width: 65%;
+    border-radius: 10%;
+
+ }
+   
+   .blog .date {
+       top: -10px;
+       z-index: 99;
+       width: 65px;
+       right: -10px;
+       height: 65px;
+       padding: 10px;
+       position: absolute;
+       color:#FFFFFF;
+       font-weight:bold;
+       background: #5bc0de;
+       border-radius: 999px;
+   }
+   
+   .blog .blog-details {
+       padding: 0 20px 0 0;
+   }
+   
+   .blog {
+       padding: 0;
+   }
+   
+   .well {
+       border: 0;
+       padding: 20px;
+       min-height: 63px;
+       background: #fff;
+       box-shadow: none;
+       border-radius: 10%;
+       position: relative;
+       max-height: 100%;
+       border-bottom: 2px solid #ccc;
+   }
+   
+   .blog .blog-details h2 {
+       margin-bottom: 10px;
+       padding-bottom: 10px;
+       border-bottom: 1px solid #eee;
+   }
+   
+   .blog .date .blog-number {
+       color: #fff;
+       display: block;
+       font-size: 24px;
+       text-align: center;
+   }      
+
+   blockquote{
+    text-align: center;
+   }
+
+   .div-insta{
+    text-align: center;
+   }
+   .instagram-frame{
+    width: 50%;
+    height: 69vh;
+    /* margin-left: 200px; */
+    margin-bottom: 200px;
+}

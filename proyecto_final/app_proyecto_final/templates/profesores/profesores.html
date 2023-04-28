@@ -11,7 +11,7 @@
     
             <h3 class="title">Profesores</h3>
             {% if formulario.errors %}
-                <p style="color: red;"> Algo está mal</p>
+                <p style="color: red;"> Verifica que los datos sean correctos</p>
             {% endif %}
     
             <table>
@@ -21,7 +21,8 @@
             </table>
     
             <button type="submit" class="btn_cur"> Cargar </button>
-    
+            <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'listaProfesores' %}"> Ver Profesores</a>
+
         </section>
     
     </form>

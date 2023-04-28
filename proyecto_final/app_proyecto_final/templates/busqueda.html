@@ -3,35 +3,36 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
+
 <link href="{% static 'css/buscar.css' %}" rel="stylesheet" />
 
 <form action="{% url 'buscar' %}" method="GET" class="form_busq">
     <section class="sec_busq">
         
-        <h3 class="title">Buscar comisión</h3>
+        <h3 class="title">Buscar Estudiante</h3>
         
-        <input class="busq" type="number" name="comision">
+        <input class="busq" name="nombre">
 
         <button type="submit" class="btn_busq"> Buscar </button>
 
     </section>
 
-    {% if cursos %}
+    {% if estudiantes %}
 
-    <p class="p_busq">Buscando comisión: {{comision}}</p>
+    <p class="p_busq">Buscando comisión: {{nombre}}</p>
     
     <ul class="ul_busq">
-    {% for curso in cursos%}
+    {% for estudiante in estudiantes %}
 
-        <li class="li_busq">Curso: {{curso.nombre}}</li>
-        <li class="li_busq">Comision: {{curso.comision}}</li>
+        <li class="li_busq">Nombre: {{estudiante.nombre}}</li>
+        <li class="li_busq">Apellido: {{estudiante.apellido}}</li>
 
     {% endfor %}
 
     </ul>
     {% else %}
         
-        <p class="p_busq">No hay datos de esta comisión</p>
+        <p class="p_busq">No hay datos con este nombre</p>
         
     {% endif %}
 

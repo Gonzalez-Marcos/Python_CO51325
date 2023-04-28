@@ -1,0 +1,45 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+
+<form action="{% url 'listaEstudiantes' %}" method="POST" class="form_curso"> {% csrf_token %}
+    <div class="alert alert-success alert-dismissible fade show"  id="alert-success">
+        {{mensaje}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <h3 class="title">Lista de Estudiantes</h3>
+
+    <table class="table">
+        <thead class="thead-dark">
+
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Email</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for estudiante in estudiantes %}
+            <tr>
+                <td>{{estudiante.nombre}}</td>
+                <td>{{estudiante.apellido}}</td>
+                <td>{{estudiante.email}}</td>
+
+                <td>
+                    <a class="btn" href="{% url 'editarEstudiante' estudiante.id %}" id="btn-edit"><i class="bi bi-pencil-square"></i></a>
+                    <a class="btn" href="{% url 'eliminarEstudiante' estudiante.id %}" id="btn-elim"><i class="bi bi-trash3"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+        <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'estudiantes' %}"> Agregar Estudiantes</a>
+
+
+</form>
+{% endblock %}

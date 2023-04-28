@@ -1,0 +1,71 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block header %}
+
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+
+{% endblock %}
+
+{% block contenidoQueCambia %}
+<!--Main layout-->
+<main class="my-5">
+  <div class="container">
+    <!--Section: Content-->
+    <section class="text-center">
+      <h4 class="mb-5"><strong>Bienvenidos a nuestro BLOG</strong></h4>
+
+      <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="card">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="{{ post.imagen.url }}" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Post title</h5>
+              <p class="card-text">
+                {{ post.text }}
+              </p>
+              <a href="{% url 'blog' %}" class="btn btn-primary">Volver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--Section: Content-->
+  </div>
+</main>
+<!--Main layout-->
+{% for comentario in comentarios %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ comentario.nombre }}</h5>
+    <p class="card-text">{{ comentario.texto }}</p>
+    <p class="card-text">{{ comentario.fechaComentario }}</p>
+
+
+  </div>
+</div>
+{% endfor %}
+
+{% if user.is_authenticated %}
+<form action="{% url 'comentarios' post.id %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+  <section class="sec_cur">
+    <h3 class="title">Envianos tu comentario</h3>
+    <table>
+
+      {{formulario.as_table}}
+
+    </table>
+    <button type="submit" class="btn_cur"> Enviar </button>
+
+  </section>
+
+</form>
+{% endif %}
+
+{% endblock %}

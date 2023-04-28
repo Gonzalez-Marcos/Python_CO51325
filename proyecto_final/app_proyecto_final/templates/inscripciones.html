@@ -1,0 +1,48 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+
+<form action="{% url 'inscripciones' %}" method="POST" class="form_curso"> {% csrf_token %}
+    <section class="sec_cur">
+        <figure class="text-center h3">
+            <blockquote class="blockquote">
+              <p class="title">Nuevos Alumnos <em class="text-muted h2">Abierta la inscripción</em></p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                Por consultas y solicitud de entrevistas, por favor complete el formulario.
+            </figcaption>
+          </figure>
+        {% if formulario.errors %}
+            <p style="color: red;"> Algo está mal</p>
+        {% endif %}
+
+        <table>
+
+            {{  form.as_table  }}
+
+        </table>
+
+        <button type="submit" class="btn_cur btn btn-secondary"> Enviar </button>
+        <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'inicioApp' %}"> Volver</a>
+
+
+    </section>
+   
+
+</form>
+  <script>
+                {% if messages  %}
+                        {% for m in messages %}
+                                Swal.fire({
+                                    "title": "Mensaje Enviado!",
+                                    "text": "{{m}}",
+                                    "icon": "success"
+                                })
+                        {% endfor %}
+                    {% endif %}
+            </script>
+{% endblock %}

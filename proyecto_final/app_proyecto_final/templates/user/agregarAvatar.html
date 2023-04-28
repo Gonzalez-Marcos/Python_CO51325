@@ -1,0 +1,31 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+
+<form action="{% url 'agregarAvatar' %}" method="POST" class="form_curso" enctype="multipart/form-data"> {% csrf_token %}
+    <section class="sec_cur">
+
+        <img src="{{ avatar }}" alt="Avatar" style="width:20vh;height:20vh;" class="bg-info rounded-circle" /> 
+
+        <h3 class="title">Cambiar Avatar</h3>
+        {% if formulario.errors %}
+            <p style="color: red;"> Algo está mal</p>
+        {% endif %}
+
+        <table>
+
+            {{  formulario.as_table  }}
+
+        </table>
+
+        <button type="submit" class="btn_cur btn btn-secondary"> Guardar </button>
+        <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'editarPerfil' %}"> Volver al perfil</a>
+
+
+    </section>
+
+</form>
+{% endblock %}

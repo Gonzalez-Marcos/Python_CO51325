@@ -1,0 +1,153 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block contenidoQueCambia%}
+<link href="{% static 'css/inicio.css' %}" rel="stylesheet" />
+
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="false">
+            <img src="{% static 'assets/inscripciones.png' %}" class="d-block w-50" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="h5">Contacto vía mail </h5>
+                <p class>Implementado sistema de contacto para incripción vía mail.<a class="nav-link active"
+                        aria-current="page" href="{% url 'inscripciones' %}">...Ver Más</a></p>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="false">
+            <img src="{% static 'assets/inscripciones.png' %}" class="d-block w-50" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Second slide label</h5>
+                <p>Some representative placeholder content for the second slide.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'assets/inscripciones.png' %}" class="d-block w-50" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Third slide label</h5>
+                <p>Some representative placeholder content for the third slide.</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="bootstrap snippets bootdey" style="padding: 70px 0 30px;">
+    <hr>
+    <h1 class="h1 text-muted mb-5">"La enseñanza que deja huella no es la que se hace de cabeza a cabeza, sino de
+        corazón a corazón"</h1>
+    </ol>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="well blog">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                        <div class="image">
+                            <img class="imagen_inicio" src="{% static 'assets/frenteElumar.jpg' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <div class="blog-details">
+                            <h2>Proyectos</h2>
+                            <p>
+                                Nuestra metodología de trabajo es a través del ABP (Aprendizaje basado en Proyectos),
+                                orientados a través de tres ejes fundamentales: Aprender a aprender; Aprender a convivir
+                                con el cambio permanente; Aprender a convivir con otros. Para proporcionar las
+                                herramientas necesarias, la escuela busca generar aprendizajes y experiencias que no se
+                                producen naturalmente en su exterior, y lleva a su interior procesos reflexivos, acerca
+                                de la actualidad, el conocimiento y las relaciones humanas.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="well blog">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                        <div class="image">
+                            <img class="imagen_inicio" src="{% static 'assets/administracion.jpg' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <div class="blog-details">
+                            <h2>Administración</h2>
+                            <p>Para consultas sobre vacantes o información adicional podés ingresar al siguiente link y
+                                mandarnos tu consulta.</p>
+                            <a href="{% url 'inscripciones' %}">..Hacé click aquí</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="well blog">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                        <div class="image">
+                            <img class="imagen_inicio" src="{% static 'assets/salas.jpg' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <div class="blog-details">
+                            <h2>Jornadas</h2>
+                            <br><br>
+                            <ul>
+                                <p class="h5">Jornadas Simples</p>
+                                <li> 7:45 hs a 11:45 hs</li>
+                                <li>13:00 hs a 16:45 hs</li>
+                            </ul>
+                            <br>
+                            <ul>
+                                <p class="h5">Jornadas Extendida</p>
+                                <li>7:45 hs a 13:00 hs</li>
+                                <li>7:45 hs a 15:00 hs</li>
+                                <li>11:00 hs a 16:45 hs</li>
+                            </ul>
+                            <ul>
+                                <p class="h5">Doble Jornada</p>
+                                <li>7:45 hs a 16:45 hs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for comentario in comentarios %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ comentario.nombre }}</h5>
+            <p class="card-text">{{ comentario.texto }}</p>
+            <p class="card-text">{{ comentario.fechaComentario }}</p>
+
+
+        </div>
+    </div>
+    {% endfor %}
+    <div class="div-insta well blog blog-details">
+        <h1 class="h1">Seguinos en nuestras redes</h1>
+        <iframe class="instagram-frame" src="https://www.instagram.com/jardinelumar/embed"></iframe>
+    </div>
+
+    {% endblock %}

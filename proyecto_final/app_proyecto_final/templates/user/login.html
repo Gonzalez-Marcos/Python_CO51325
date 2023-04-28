@@ -1,0 +1,31 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block header %}
+
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+
+{% endblock %}
+
+{% block contenidoQueCambia %}
+
+<form action="{% url 'login' %}" method="POST"> {% csrf_token %}
+    <section class="sec_cur">
+        <h3 class="title">Ingreso sólo ADMINISTRACIÓN</h3>
+        <table>
+
+            {{formulario.as_table}}
+
+        </table>
+        {% if formulario.errors %}
+                <p style="color: red;"> Usuario o contraseña inválidos</p>
+        
+        {% endif %} 
+        <button type="submit" class="btn_cur"> Ingresar </button>
+
+    </section>
+
+</form>
+
+{% endblock %}
