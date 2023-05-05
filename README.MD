@@ -39,7 +39,9 @@ En el almacenamiento de los datos administrativos existe la opción de editar/el
 * Django 4.2.1
 
 ### Pruebas Realizadas
-Ver archivo titulado "Pruebas Proyecto Python CH.xlsx" el cual se encuentra en el presente repositorio https://github.com/Gonzalez-Marcos/Python_CO51325/tree/main/proyecto_final
+Ver archivo titulado "Pruebas Proyecto Python CH.xlsx" el cual se encuentra en el presente repositorio o haciendo click en el enlace.
+
+*https://github.com/Gonzalez-Marcos/Python_CO51325/blob/main/Pruebas%20Proyecto%20Python%20CH.xlsx*
 
 ## Video Demostración
 
