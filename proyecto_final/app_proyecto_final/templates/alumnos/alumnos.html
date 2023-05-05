@@ -1,0 +1,34 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+<link href="{% static 'css/estudiantes.css' %}" rel="stylesheet" />
+
+<body>
+    <form action="{% url 'alumnos' %}" method="POST" class="form_curso"> {% csrf_token %}
+        <section class="sec_cur">
+    
+            <h3 class="title">Agregar Alumno</h3>
+
+            {% if formulario.errors %}
+                <p style="color: red;"> {{mensaje}}</p>
+            {% endif %}
+    
+            <table>
+    
+                {{  formulario.as_table  }}
+    
+            </table>
+            <div class="btn_group">
+                <button type="submit" class="btn_cur"> Cargar </button>
+                <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'listaAlumnos' %}"> Ver Alumnos</a>
+            </div>
+        </section>
+    
+    </form>
+    {% endblock %}
+</body>
+</html>

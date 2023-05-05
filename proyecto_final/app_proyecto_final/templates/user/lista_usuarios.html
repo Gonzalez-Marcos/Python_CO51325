@@ -1,0 +1,67 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+
+<form action="{% url 'listaUsuarios' %}" method="POST" class="form_curso"> {% csrf_token %}
+    <div class="alert alert-success alert-dismissible fade show" id="alert-success">
+        {{mensaje}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <h3 class="title">Lista de Usuarios</h3>
+    <table class="table">
+        <thead class="thead-dark">
+
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Email</th>
+                <th scope="col">Admin</th>
+
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in usuarios %}
+            <tr>
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.email}}</td>
+                <td>{% if user.is_superuser %} Sí {% else %} No {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    
+        <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'inicioApp' %}"> Volver</a>
+    
+</form>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    function eliminarSala(id) {
+
+        Swal.fire({
+            "title": "¿Estas seguro?!",
+            "text": "Esta acción no se puede deshacer",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, cancelar",
+            "confirmButtonText": "Si, eliminar",
+            "reverseButtons": true,
+            "confirmButtonColor": "#dc3545"
+        })
+        .then(function(result){
+            if(result.isConfirmed){
+                window.location.href = "/app_proyecto_final/eliminarSala/"+id+""
+            }
+        })
+    }
+</script>
+{% endblock %}

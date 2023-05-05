@@ -1,0 +1,28 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+<link href="{% static 'css/inscripciones.css' %}" rel="stylesheet" />
+
+<form action="{% url 'editarDocente' docente.id %}" method="POST"> {% csrf_token %}
+    <section class="sec_cur">
+        <h3 class="title">Editar de Docentes</h3>
+        <table>
+            
+            {{ formulario.as_table }}
+            
+        </table>
+        
+        <!-- <input type="submit" value="Guardar Cambios" class="btn_cur"> -->
+        <div class="btn_group">
+            <button type="submit" class="btn_cur">Guardar</button>
+            <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'listaDocentes' %}"> Volver</a>
+        </div>
+    </section>
+    
+    </form>
+
+
+{% endblock %}

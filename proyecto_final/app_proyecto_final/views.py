@@ -3,7 +3,7 @@ from .models import *
 from django.http import HttpResponse
 from .forms import *
 
-from django.contrib.auth.forms import UserCreationForm ,AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm ,AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required #para vistas basadas en funciones DEF  
 
@@ -35,42 +35,17 @@ def about(request):
     return render(request, 'about.html', {"avatar": obtenerAvatars(request)})
 
 
-
-def entregables(request):
-
-    if request.method == 'POST':
-
-        formulario = EntregableFormulario(request.POST) #de esta manera llega toda la info desde el html
-
-        print(formulario)
-
-        if formulario.is_valid: #Si pasó la validacion de Django continuo.
-
-            informacion = formulario.cleaned_data
-
-            entregable = Entregable(nombre = informacion['nombre'], fecha_entrega = informacion['fecha_entrega'], entregado = informacion['entregado'])
-
-            entregable.save()
-
-            return render(request, 'inicio.html')
-    else:
-
-        formulario = EntregableFormulario()
-    
-        return render(request, 'entregables.html', {'formulario': formulario})
-
-
-#<----------------------------------------- Buscador ----------------------------------------->
+#<----------------------------------------- Buscadores ----------------------------------------->
 @login_required
-def buscar(request):
+def buscarSala(request):
 
-    if request.GET:
+    if request.method == "GET":
 
         nombre = request.GET['nombre']
 
-        estudiantes = Estudiante.objects.filter(nombre__icontains = nombre)
+        salas = Sala.objects.filter(nombre__icontains = nombre)
 
-        return render(request, 'busqueda.html', {"estudiantes": estudiantes, "nombre": nombre, "avatar": obtenerAvatars(request)})
+        return render(request, 'salas/buscar_sala.html', {"salas": salas, "nombre": nombre, "avatar": obtenerAvatars(request)})
     
     else:
 
@@ -79,255 +54,296 @@ def buscar(request):
         if nombre == "":
 
             respuesta = "No enviaste datos"
-            return render(request, 'busqueda.html', {"respuesta": respuesta, "avatar": obtenerAvatars(request)})
-
-
-#<----------------------------------------- Cursos ----------------------------------------->
+            return render(request, 'salas/buscar_sala.html', {"respuesta": respuesta, "avatar": obtenerAvatars(request)})
 
 @login_required
-def cursos(request): #Funcion para crear cursos
+def buscarAlumno(request):
+
+    if request.method == "GET":
+
+        dni = request.GET['dni']
+
+        alumnos = Alumno.objects.filter(dni=dni)
+
+        return render(request, 'alumnos/buscar_alumno.html', {"alumnos": alumnos, "dni": dni, "avatar": obtenerAvatars(request)})
+    
+    else:
+
+        if dni == "":
+
+            respuesta = "No enviaste datos"
+            return render(request, 'alumnos/buscar_alumno.html', {"respuesta": respuesta, "avatar": obtenerAvatars(request)})
+
+
+@login_required
+def buscarDocente(request):
+
+    if request.method == "GET":
+
+        apellido = request.GET['apellido']
+
+        docentes = Docente.objects.filter(apellido__icontains = apellido)
+
+        return render(request, 'docentes/buscar_docente.html', {"docentes": docentes, "apellido": apellido, "avatar": obtenerAvatars(request)})
+    
+    else:
+
+        apellido = ""
+
+        if apellido == "":
+
+            respuesta = "No enviaste datos"
+            return render(request, 'docentes/buscar_docente.html', {"respuesta": respuesta, "avatar": obtenerAvatars(request)})
+        
+
+#<----------------------------------------- Salas ----------------------------------------->
+
+@login_required
+def salas(request): #Funcion para crear cursos
 
         if request.method == 'POST':
 
-            formulario = CursoFormulario(request.POST) #de esta manera llega toda la info desde el html
+            formulario = SalasFormulario(request.POST) #de esta manera llega toda la info desde el html
 
             print(formulario)
 
             if formulario.is_valid(): #Si pasó la validacion de Django continuo.
 
-                curso = Curso()
-                curso.nombre = formulario.cleaned_data['curso']
-                curso.comision = formulario.cleaned_data['comision']
-                curso.save()
+                sala = Sala()
+                sala.nivel = formulario.cleaned_data['nivel']
+                sala.nombre = formulario.cleaned_data['nombre']
+                sala.save()
                 messages.success(request, "Curso agregado exitosamente")
-                formulario = CursoFormulario()
-                cursos = Curso.objects.all()
+                formulario = SalasFormulario()
+                salas = Sala.objects.all()
                 
-                return render(request, 'cursos/cursos_lista.html', {'cursos': cursos, 'formulario': formulario, "avatar": obtenerAvatars(request)}) 
+                return render(request, 'salas/salas_lista.html', {'salas': salas, 'formulario': formulario, "avatar": obtenerAvatars(request)}) 
         else:
 
-           formulario = CursoFormulario()
+           formulario = SalasFormulario()
     
-        return render(request, 'cursos/cursos.html', {'formulario': formulario, "avatar": obtenerAvatars(request)})
+        return render(request, 'salas/salas.html', {'formulario': formulario, "avatar": obtenerAvatars(request)})
 
-#Lista Cursos
+#Lista Salas
 @login_required
-def lista_cursos(request):
+def lista_salas(request):
     if request.method == "GET":
 
-        cursos = Curso.objects.all()
+        salas = Sala.objects.all()
         
-        formulario = CursoFormulario()
+        formulario = SalasFormulario()
 
-        return render(request, "cursos/cursos_lista.html", {"cursos": cursos, "formulario": formulario, "avatar": obtenerAvatars(request)})
+        return render(request, "salas/salas_lista.html", {"salas": salas, "formulario": formulario, "avatar": obtenerAvatars(request)})
     
-#Eliminar Cursos
+#Eliminar Salas
 @login_required
-def eliminar_curso(request, id):
+def eliminar_sala(request, id):
 
-    curso = Curso.objects.get(id = id)
-    print(curso)
-    curso.delete()
+    sala = Sala.objects.get(id = id)
+    print(sala)
+    sala.delete()
     messages.success(request, "Eliminado correctamente")
-    cursos = Curso.objects.all()
-    formulario = CursoFormulario()
-    return render(request, 'cursos/cursos_lista.html', {"cursos": cursos, "mensaje": "Curso eliminado", "formulario":formulario, "avatar": obtenerAvatars(request)})
+    salas = Sala.objects.all()
+    formulario = SalasFormulario()
+    return render(request, 'salas/salas_lista.html', {"salas": salas, "mensaje": "Curso eliminado", "formulario":formulario, "avatar": obtenerAvatars(request)})
 
-#Editar cursos
+#Editar Salas
 @login_required
-def editar_curso(request, id):
+def editar_sala(request, id):
 
-    curso = Curso.objects.get(id = id)
+    sala = Sala.objects.get(id = id)
     if request.method == "POST":
-        formulario = CursoFormulario(request.POST)
+        formulario = SalasFormulario(request.POST)
         if formulario.is_valid():
 
             informacion = formulario.cleaned_data
-            curso.nombre = informacion['curso']
-            curso.comision = informacion['comision']
+            sala.nivel = informacion['nivel']
+            sala.nombre = informacion['nombre']
 
-            curso.save()
-            messages.success(request, "Curso modificado")
-            cursos = Curso.objects.all()
-            formulario = CursoFormulario()
+            sala.save()
+            messages.success(request, "Sala modificada")
+            salas = Sala.objects.all()
+            formulario = SalasFormulario()
 
-            return render(request, 'cursos/cursos_lista.html', {"cursos": cursos, "mensaje": "Curso modificado exitosamente", "formulario": formulario, "avatar": obtenerAvatars(request)})
+            return render(request, 'salas/salas_lista.html', {"salas": salas, "mensaje": "Sala modificada exitosamente", "formulario": formulario, "avatar": obtenerAvatars(request)})
     
     else:
-        formulario = CursoFormulario(initial={"curso": curso.nombre, "comision": curso.comision})
+        formulario = SalasFormulario(initial={"nivel": sala.nivel, "nombre": sala.nombre})
 
-        return render(request, 'cursos/editar_curso.html', {"formulario": formulario, "curso": curso, "avatar": obtenerAvatars(request)})
+        return render(request, 'salas/editar_sala.html', {"formulario": formulario, "sala": sala, "avatar": obtenerAvatars(request)})
     
 
-#<----------------------------------------- Profesores ----------------------------------------->
+#<----------------------------------------- Docentes ----------------------------------------->
 
 @login_required
-def profesores(request):
+def docentes(request):
 
     if request.method == 'POST':
 
-        formulario = ProfesorFormulario(request.POST) #de esta manera llega toda la info desde el html
+        formulario = DocenteFormulario(request.POST) #de esta manera llega toda la info desde el html
 
         print(formulario)
 
         if formulario.is_valid(): #Si pasó la validacion de Django continuo.
 
-                profesor = Profesor()
-                profesor.nombre = formulario.cleaned_data['nombre'] 
-                profesor.apellido = formulario.cleaned_data['apellido'] 
-                profesor.email = formulario.cleaned_data['email']
-                profesor.profesion = formulario.cleaned_data['profesion']
-                profesor.save()
-                messages.success(request, "Profesor creado correctamente")
-                formulario = ProfesorFormulario()
-                profesores = Profesor.objects.all()
+                docente = Docente()
+                docente.nombre = formulario.cleaned_data['nombre'] 
+                docente.apellido = formulario.cleaned_data['apellido'] 
+                docente.email = formulario.cleaned_data['email']
+                docente.telefono = formulario.cleaned_data['telefono']
+                docente.save()
+                messages.success(request, "Docente creado correctamente")
+                formulario = DocenteFormulario()
+                docentes = Docente.objects.all()
 
 
-                return render(request, 'profesores/profesores_lista.html', {"profesores": profesores, "formulario": formulario ,"avatar": obtenerAvatars(request)})
+                return render(request, 'docentes/docentes_lista.html', {"docentes": docentes, "formulario": formulario ,"avatar": obtenerAvatars(request)})
         
         else:
-                return render(request, 'profesores/profesores.html', {"formulario": formulario, 'mensaje': "Error al enviar el formulario" ,"avatar": obtenerAvatars(request)})
+                return render(request, 'docentes/docentes.html', {"formulario": formulario, 'mensaje': "Error al enviar el formulario" ,"avatar": obtenerAvatars(request)})
             
     else:
 
-        formulario = ProfesorFormulario()
+        formulario = DocenteFormulario()
     
-        return render(request, 'profesores/profesores.html', {'formulario': formulario})
+        return render(request, 'docentes/docentes.html', {'formulario': formulario, "avatar": obtenerAvatars(request)})
 
-#Lista Profesores
+#Lista Docentes
 @login_required
-def lista_profesores(request):
+def lista_docentes(request):
 
     if request.method == "GET":
 
-        profesores = Profesor.objects.all()
+        docentes = Docente.objects.all()
         
-        formulario = ProfesorFormulario()
+        formulario = DocenteFormulario()
 
-        return render(request, "profesores/profesores_lista.html", {"profesores": profesores, "formulario": formulario, "avatar": obtenerAvatars(request)})
+        return render(request, "docentes/docentes_lista.html", {"docentes": docentes, "formulario": formulario, "avatar": obtenerAvatars(request)})
     
-#Eliminar Profesor
+#Eliminar Docente
 @login_required
-def eliminar_profesor(request, id):
+def eliminar_docente(request, id):
 
-    profesor = Profesor.objects.get(id = id)
-    print(profesor)
-    profesor.delete()
+    docente = Docente.objects.get(id = id)
+    print(docente)
+    docente.delete()
     messages.success(request, "Eliminado correctamente")
-    profesores = Profesor.objects.all()
-    formulario = ProfesorFormulario()
+    docentes = Docente.objects.all()
+    formulario = DocenteFormulario()
 
-    return render(request, 'profesores/profesores_lista.html', {"profesores": profesores, "mensaje": "Profesor eliminado", "formulario": formulario, "avatar": obtenerAvatars(request)})
+    return render(request, 'docentes/docentes_lista.html', {"docentes": docentes, "mensaje": "Docente eliminado", "formulario": formulario, "avatar": obtenerAvatars(request)})
 
-#Editar Profesor
+#Editar Docente
 @login_required
-def editar_profesor(request, id):
+def editar_docente(request, id):
 
-    profesor = Profesor.objects.get(id = id)
+    docente = Docente.objects.get(id = id)
 
     if request.method == "POST":
-        formulario = ProfesorFormulario(request.POST)
+        formulario = DocenteFormulario(request.POST)
 
         if formulario.is_valid():
 
             informacion = formulario.cleaned_data
-            profesor.nombre = informacion['nombre']
-            profesor.apellido = informacion['apellido']
-            profesor.email = informacion['email']
-            profesor.profesion = informacion['profesion']
+            docente.nombre = informacion['nombre']
+            docente.apellido = informacion['apellido']
+            docente.email = informacion['email']
+            docente.telefono = informacion['telefono']
 
 
-            profesor.save()
+            docente.save()
             messages.success(request, "Editado correctamente")
 
-            profesores = Profesor.objects.all()
-            formulario = ProfesorFormulario()
+            docentes = Docente.objects.all()
+            formulario = DocenteFormulario()
 
-            return render(request, 'profesores/profesores_lista.html', {"profesores": profesores, "mensaje": "Profesor modificado exitosamente", "formulario": formulario, "avatar": obtenerAvatars(request)})
+            return render(request, 'docentes/docentes_lista.html', {"docentes": docentes, "mensaje": "Docente modificado exitosamente", "formulario": formulario, "avatar": obtenerAvatars(request)})
     else:
-        formulario = ProfesorFormulario(initial={"nombre": profesor.nombre, "apellido": profesor.apellido, "email": profesor.email, "profesion": profesor.profesion})
+        formulario = DocenteFormulario(initial={"nombre": docente.nombre, "apellido": docente.apellido, "email": docente.email, "telefono": docente.telefono})
 
-        return render(request, 'profesores/editar_profesor.html', {"formulario": formulario, "profesor": profesor, "avatar": obtenerAvatars(request)})
+        return render(request, 'docentes/editar_docente.html', {"formulario": formulario, "docente": docente, "avatar": obtenerAvatars(request)})
 
 
-#<----------------------------------------- Estudiantes ----------------------------------------->
+#<----------------------------------------- Alumnos ----------------------------------------->
 @login_required
-def estudiantes(request):
+def alumnos(request):
 
     if request.method == 'POST':
 
-        formulario = EstudianteFormulario(request.POST) #de esta manera llega toda la info desde el html
+        formulario = AlumnoFormulario(request.POST) #de esta manera llega toda la info desde el html
 
         print(formulario)
 
         if formulario.is_valid(): #Si pasó la validacion de Django continuo.
 
-            estudiante = Estudiante()
-            estudiante.nombre = formulario.cleaned_data['nombre'] 
-            estudiante.apellido = formulario.cleaned_data['apellido'] 
-            estudiante.email = formulario.cleaned_data['email']
-            estudiante.save()
-
-            formulario = EstudianteFormulario()
-            estudiantes = Estudiante.objects.all()
+            alumno = Alumno()
+            alumno.nombre = formulario.cleaned_data['nombre'] 
+            alumno.apellido = formulario.cleaned_data['apellido'] 
+            alumno.dni = formulario.cleaned_data['dni']
+            alumno.save()
+            messages.success(request, "Alumno creado correctamente")
+            formulario = AlumnoFormulario()
+            alumnos = Alumno.objects.all()
             
-            return render(request, "estudiantes/estudiantes_lista.html", {"estudiantes": estudiantes, "formulario": formulario, "avatar": obtenerAvatars(request)})
+            return render(request, "alumnos/alumnos_lista.html", {"alumnos": alumnos, "formulario": formulario, "avatar": obtenerAvatars(request)})
 
     else:
 
-        formulario = EstudianteFormulario()
+        formulario = AlumnoFormulario()
     
-        return render(request, 'estudiantes/estudiantes.html', {'formulario': formulario, "avatar": obtenerAvatars(request)})
+        return render(request, 'alumnos/alumnos.html', {'formulario': formulario, "avatar": obtenerAvatars(request)})
 
-#Lista Estudiantes
+#Lista Alumnos
 @login_required
-def lista_estudiantes(request):
+def lista_alumnos(request):
 
     if request.method == "GET":
 
-        estudiantes = Estudiante.objects.all()
+        alumnos = Alumno.objects.all()
         
-        formulario = EstudianteFormulario()
+        formulario = AlumnoFormulario()
 
-        return render(request, "estudiantes/estudiantes_lista.html", {"estudiantes": estudiantes, "formulario": formulario, "avatar": obtenerAvatars(request)})
+        return render(request, "alumnos/alumnos_lista.html", {"alumnos": alumnos, "formulario": formulario, "avatar": obtenerAvatars(request)})
     
-#Eliminar Estudiante
+#Eliminar Alumnos
 @login_required
-def eliminar_estudiante(request, id):
+def eliminar_alumno(request, id):
 
-    estudiante = Estudiante.objects.get(id = id)
-    print(estudiante)
-    estudiante.delete()
-    estudiantes = Estudiante.objects.all()
-    formulario = EstudianteFormulario()
+    alumno = Alumno.objects.get(id = id)
+    print(alumno)
+    alumno.delete()
+    messages.success(request, "Eliminado correctamente")
+    alumnos = Alumno.objects.all()
+    formulario = AlumnoFormulario()
 
-    return render(request, 'estudiantes/estudiantes_lista.html', {"estudiantes": estudiantes, "mensaje": "Estudiante eliminado", "formulario": formulario, "avatar": obtenerAvatars(request)})
+    return render(request, 'alumnos/alumnos_lista.html', {"alumnos": alumnos, "mensaje": "Estudiante eliminado", "formulario": formulario, "avatar": obtenerAvatars(request)})
 
-#Editar Estudiante
+#Editar Alumnos
 @login_required
-def editar_estudiante(request, id):
+def editar_alumno(request, id):
 
-    estudiante = Estudiante.objects.get(id = id)
+    alumno = Alumno.objects.get(id = id)
 
     if request.method == "POST":
-        formulario = EstudianteFormulario(request.POST)
+        formulario = AlumnoFormulario(request.POST)
 
         if formulario.is_valid():
 
             informacion = formulario.cleaned_data
-            estudiante.nombre = informacion['nombre']
-            estudiante.apellido = informacion['apellido']
-            estudiante.email = informacion['email']
+            alumno.nombre = informacion['nombre']
+            alumno.apellido = informacion['apellido']
+            alumno.dni = informacion['dni']
 
-            estudiante.save()
-            estudiantes = Estudiante.objects.all()
-            formulario = EstudianteFormulario()
+            alumno.save()
+            messages.success(request, "Editado correctamente")
+            alumnos = Alumno.objects.all()
+            formulario = AlumnoFormulario()
 
-            return render(request, 'estudiantes/estudiantes_lista.html', {"estudiantes": estudiantes, "mensaje": "Estudiante modificado exitosamente", "formulario": formulario, "avatar": obtenerAvatars(request)})
+            return render(request, 'alumnos/alumnos_lista.html', {"alumnos": alumnos, "mensaje": "Estudiante modificado exitosamente", "formulario": formulario, "avatar": obtenerAvatars(request)})
     else:
-        formulario = EstudianteFormulario(initial={"nombre": estudiante.nombre, "apellido": estudiante.apellido, "email": estudiante.email})
+        formulario = AlumnoFormulario(initial={"nombre": alumno.nombre, "apellido": alumno.apellido, "dni": alumno.dni})
 
-        return render(request, 'estudiantes/editar_estudiante.html', {"formulario": formulario, "estudiante": estudiante})
+        return render(request, 'alumnos/editar_alumno.html', {"formulario": formulario, "alumno": alumno})
 
 
 #<----------------------------------------- Login ----------------------------------------->
@@ -393,13 +409,57 @@ def editarPerfil(request):
                                   
         return render(request, 'user/editarPerfil.html', {"formulario": formulario, "nombreusuario": usuario.username, "avatar": obtenerAvatars(request)})
 
+#Cambiar Password
+@login_required
+def cambiar_contrasena(request):
+    if request.method == 'POST':
+        form = CambioPassword(request.user, data=request.POST)
+        
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Tu contraseña ha sido cambiada exitosamente.')
+            formulario = AuthenticationForm()
+            return render(request, 'user/login.html', {'formulario': formulario, "avatar": obtenerAvatars(request)} )
+    else:
+        form = CambioPassword(user=request.user)
+    return render(request, 'user/cambioPassword.html', {'form': form, "avatar": obtenerAvatars(request)})
+    
 
-#<----------------------------------------- Register ----------------------------------------->
+#Editar Perfil
+def editarPerfil(request):
+    
+    usuario = request.user
+
+    if request.method == "POST":
+
+        formulario = UserEditForm(request.POST)
+
+        if formulario.is_valid():
+
+            informacion = formulario.cleaned_data
+
+            usuario.password1 = informacion["password1"]
+            usuario.password2 = informacion["password2"]
+            usuario.save()
+
+            return render(request, 'inicio.html', {"mensaje": f"Usuario {usuario.username} editado exitosamente.", "avatar": obtenerAvatars(request)})
+        else:
+
+            return render(request, 'user/editarPerfil.html', {"formulario": formulario, "nombreusuario": usuario.username, "avatar": obtenerAvatars(request)})
+        
+    else:
+
+        formulario = UserEditForm(instance = usuario)
+                                  
+        return render(request, 'user/editarPerfil.html', {"formulario": formulario, "nombreusuario": usuario.username, "avatar": obtenerAvatars(request)})
+
+
+#<----------------------------------------- Register/Super User ----------------------------------------->
 def register(request):
 
     if request.method=="POST":
 
-        formulario = RegistroUsuarioForm(request.POST)
+        formulario = RegistroUsuarioForm(request.POST, request.FILES)
 
         if formulario.is_valid():
 
@@ -415,6 +475,48 @@ def register(request):
         formulario= RegistroUsuarioForm()
         
         return render(request, "user/register.html", {"formulario": formulario})
+
+#Lista de Usuarios registrados
+@login_required
+def lista_usuarios(request):
+
+    if request.method == "GET":
+
+        usuarios = User.objects.all().order_by('-is_superuser')
+        
+        formulario = AlumnoFormulario()
+
+        return render(request, "user/lista_usuarios.html", {"usuarios": usuarios, "formulario": formulario, "avatar": obtenerAvatars(request)})
+
+
+def crearUser(request):
+    if request.method == 'POST':
+        # Obtener los datos del formulario
+        form = SuperUsuarioForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            password = form.cleaned_data['password1']
+            is_superuser = form.cleaned_data.get('is_superuser', False)
+
+            # Crear el objeto de usuario y establecer los atributos
+            user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name, password=password)
+            user.is_superuser = is_superuser
+
+            # Guardar el objeto de usuario en la base de datos
+            user.save()
+            messages.success(request, "Usuario creado correctamente")
+
+
+            return  render(request, "inicio.html", {"mensaje":f"Usuario {username} creado correctamente", "avatar": obtenerAvatars(request)})
+    else:
+        # Mostrar el formulario para crear el superusuario
+        form = SuperUsuarioForm()
+
+    return render(request, 'user/crear_superusuario.html', {'form': form, "avatar": obtenerAvatars(request)})
+
 
 @login_required
 #<----------------------------------------- Avatars ----------------------------------------->

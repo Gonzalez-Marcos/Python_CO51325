@@ -37,11 +37,15 @@ section.sec_cur {
     height: 40px;
 }
 
-.btn_cur {
+.btn_group {
+    display: flex;
+}
+
+.btn_cur{
 
     position: relative;
     border: none;
-    width: 10%;
+    width: 15%;
     height: 40px;
     margin-top: 15px;
     border-radius: 8px;
@@ -49,7 +53,8 @@ section.sec_cur {
     color: #fff;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
     right: -30px;
-
+    margin-left: 10px;
+    text-align: center;
 }
 
 /* .div_btn{

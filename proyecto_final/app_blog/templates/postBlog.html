@@ -5,6 +5,8 @@
 {% block header %}
 
 <link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+<link href="{% static 'css/postBlog.css' %}" rel="stylesheet" />
+
 
 {% endblock %}
 
@@ -27,10 +29,10 @@
             {{  formulario.as_table  }}
 
         </table>
-
-        <button type="submit" class="btn_cur btn btn-secondary"> Enviar </button>
-        <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'blog' %}"> Volver</a>
-
+        <div class="btn_group">
+            <button type="submit" class="btn_cur btn btn-secondary"> Enviar </button>
+            <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'blog' %}"> Volver</a>
+        </div>
 
     </section>
    

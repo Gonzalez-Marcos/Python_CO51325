@@ -1,0 +1,32 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block header %}
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block contenidoQueCambia %}
+
+<h3>{{ mensaje }}</h3>
+
+<form action="{% url 'crearUser' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+    <section class="sec_cur">
+        <h3 class="title">Registrar usuario Admin</h3>
+        <table>
+
+            {{ form.as_table }}
+    
+        </table>
+
+                <button type="submit" class="btn_cur"> Registrar </button>
+
+    </section>
+
+
+
+</form>
+
+
+{% endblock %}

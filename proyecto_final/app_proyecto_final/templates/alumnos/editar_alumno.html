@@ -1,0 +1,68 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+<link href="{% static 'css/inscripciones.css' %}" rel="stylesheet" />
+
+<h3>{{ mensaje }}</h3>
+
+<form action="{% url 'editarAlumno' alumno.id %}" method="POST"> {% csrf_token %}
+    <section class="sec_cur">
+    <h3 class="title">Editar Alumno</h3>
+
+        <table>
+            
+            {{ formulario.as_table }}
+            
+        </table>
+        
+        <div class="btn_group">
+          <button type="submit" class="btn_cur">Guardar</button>
+          <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'listaAlumnos' %}"> Volver</a>
+        </div>
+        
+    </section>
+    
+    </form>
+
+
+{% endblock %}
+
+
+{% comment %} <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title">{{ post.titulo }}</h2>
+      {% if post.imagen %}
+        <img class="card-img-top" src="{{ post.imagen.url }}" alt="{{ post.titulo }}">
+      {% endif %}
+      <p class="card-text">{{ post.texto }}</p>
+    </div>
+    <div class="card-footer text-muted">
+      {{ post.usuario.username }} - {{ post.fechaPost }}
+    </div>
+  </div>
+
+  <h4>Comentarios</h4>
+  {% if comentarios %}
+    {% for comentario in comentarios %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-muted">{{ comentario.nombre }} - {{ comentario.fechaComentario }}</h6>
+          <p class="card-text">{{ comentario.texto }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No hay comentarios todavía.</p>
+  {% endif %}
+
+  <hr>
+
+  <h4>Agregar un comentario</h4>
+  <form method="POST">
+    {% csrf_token %}
+    {{ comentario_form.as_p }}
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form> {% endcomment %}

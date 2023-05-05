@@ -1,0 +1,77 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+<div class="d-flex justify-content-center">
+    <form action="{% url 'buscarDocente' %}" method="GET" class="form-inline my-2 my-lg-0 form_curso" >
+        <h3 class="title">Busqueda de Docente</h3>
+        <table class="table">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if docentes %}
+                    {% for docente in docentes %}
+                        <tr>
+                            <td>{{docente.nombre}}</td>
+                            <td>{{docente.apellido}}</td>
+                            <td>{{docente.email}}</td>
+                            <td>{{docente.telefono}}</td>
+                            <td>
+                                <a class="btn" href="{% url 'editarDocente' docente.id %}" id="btn-edit"><i
+                                        class="bi bi-pencil-square"></i></a>
+
+                                <a class="btn" onclick="eliminarDocente( {{docente.id}} )" id="btn-elim"><i
+                                        class="bi bi-trash3"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+        
+                    <td><p class="p_busq">No hay datos con este nombre</p></td>
+                    <td></td>
+                {% endif %}
+            </tbody>
+
+        </table>
+        <input class="form-control mr-sm-2" type="search" placeholder="Ingrese apellido" aria-label="Buscar" name="apellido">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        <a class="nav-link-curso btn_cur btn btn-secondary my-2 my-sm-0" href="{% url 'docentes' %}"> Agregar Alumno</a>
+        <a class="nav-link-curso btn_cur btn btn-secondary my-2 my-sm-0" href="{% url 'listaDocentes' %}"> Volver</a>
+
+    </form>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    function eliminarDocente(id) {
+
+        Swal.fire({
+            "title": "¿Estas seguro?!",
+            "text": "Esta acción no se puede deshacer",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, cancelar",
+            "confirmButtonText": "Si, eliminar",
+            "reverseButtons": true,
+            "confirmButtonColor": "#dc3545"
+        })
+            .then(function (result) {
+                if (result.isConfirmed) {
+                    window.location.href = "/app_proyecto_final/eliminarDocente/" + id + ""
+                }
+            })
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,14 @@
+.btn_cur{
+
+    position: relative;
+    border: none;
+    width: 50%;
+    height: 40px;
+    margin-top: 15px;
+    border-radius: 8px;
+    background: #415a77;
+    color: #fff;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+    right: -30px;
+    margin-left: 10px;
+}

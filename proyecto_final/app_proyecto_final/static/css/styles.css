@@ -3579,6 +3579,7 @@ textarea.form-control-lg {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
+  left: 30%;
 }
 .dropdown-menu[data-bs-popper] {
   top: 100%;
@@ -4554,7 +4555,7 @@ textarea.form-control-lg {
 
 .card-body {
   flex: 1 1 auto;
-  padding: 1rem 1rem;
+  padding: 1.5rem 1rem;
 }
 
 .card-title {

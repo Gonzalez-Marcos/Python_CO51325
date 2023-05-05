@@ -5,51 +5,58 @@
 
 {% block contenidoQueCambia %}
 <link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+<link href="{% static 'css/about.css' %}" rel="stylesheet" />
 
 <section id="about" class="about">
 
-      <div class="container aos-init aos-animate" data-aos="fade-up">
+  <div class="container aos-init aos-animate" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Sobre Mí</h2>
-          <p>Proyecto pensado para el uso informativo y como base de datos, para una institución educativa.  </p>
-        </div>
+    <div class="section-title-about">
+      <h2>Sobre proyecto</h2>
+      <p>Proyecto diseñado para el uso informativo y como base de datos, para una institución educativa, donde se puede
+        almacenar datos como alumnos, docentes, cursos o salas. Además cuenta con un formulario de pre-inscripción o
+        contacto en caso de solicitarlo. Poseé tambien un sector de novedades donde sólo los usuarios registrados podrán
+        comentar sobre ellos.
+        Los usuarios que pertenezcan a la institución, como administradores tendran la opción de manejar los datos
+        internos.</p>
+    </div>
 
-        <div class="row">
-          <div class="col-lg-4">
-            <img src="{% static 'assets/sobreMi.jpg' %}" class="img-fluid sobreMi" alt="">
-          </div>
-          <div class="col-lg-8 pt-4 pt-lg-0 content">
-            <h3>Desarrollador &amp; Web Developer Python.</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <div class="row">
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Cumpleaños:</strong> <span>19 Mayo 1990</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>En desarrollo</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Teléfono:</strong> <span>(+54) 11 6036-1071</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Ciudad:</strong> <span>San Andrés, Gran Bs As</span></li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Años:</strong> <span>32</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Nivel:</strong> <span>Junior</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>gonzalezmarcos1905@gmail.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Disponible</span></li>
-                </ul>
-              </div>
-            </div>
-            <p>
-              Officiis eligendi itaque labore et dolorum mollitia officiis optio vero. Quisquam sunt adipisci omnis et ut. Nulla accusantium dolor incidunt officia tempore. Et eius omnis.
-              Cupiditate ut dicta maxime officiis quidem quia. Sed et consectetur qui quia repellendus itaque neque. Aliquid amet quidem ut quaerat cupiditate. Ab et eum qui repellendus omnis culpa magni laudantium dolores.
-            </p>
-          </div>
-        </div>
-
+    <div class="row about-row">
+      <div class="col-lg-4">
+        <img src="{% static 'assets/sobreMi.jpg' %}" class="img-fluid sobreMi" alt="">
       </div>
-    </section>
+      <div class="col-lg-8 pt-4 pt-lg-0 content">
+        <h3>Sobre Mí</h3>
+        <p class="fst-italic">
+          Mi nombre es Marcos Gonzalez, actualmente soy conductor de transporte Público de pasajeros, apasionado de la
+          informática, buscando siempre algo nuevo que aprender y profundizandome en lo que más me llama la atención.
+          En esta oportunidad estoy terminando de cursar en Coder House como Desarrollador Back End de Python en la comisión 51325.
+          Espero en el futuro poder dedicarme a este espacio tan hermoso como es el mundo del IT.
+          Gracias por leerme.
+        </p>
+        <div class="row">
+          <div class="col-lg-6">
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <strong>Cumpleaños:</strong> <span>19 Mayo 1990</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong>
+                <span>https://github.com/Gonzalez-Marcos/Python_CO51325</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Teléfono:</strong> <span>(+54) 11 6036-1071</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Ciudad:</strong> <span>San Andrés, Gran Bs As</span></li>
+            </ul>
+          </div>
+          <div class="col-lg-6">
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <strong>Años:</strong> <span>32</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Nivel:</strong> <span>Junior</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>gonzalezmarcos1905@gmail.com</span>
+              </li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Disponible</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 {% endblock %}

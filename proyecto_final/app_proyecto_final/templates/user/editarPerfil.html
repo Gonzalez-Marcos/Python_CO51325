@@ -4,6 +4,8 @@
 
 {% block contenidoQueCambia %}
 <link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+<link href="{% static 'css/estudiantes.css' %}" rel="stylesheet" />
+
 
 <h3>{{ mensaje }}</h3>
 
@@ -21,10 +23,12 @@
         </table>
         
         <!-- <input type="submit" value="Guardar Cambios" class="btn_cur"> -->
-        
+        <div class="btn_group">
             <button type="submit" class="btn_cur btn btn-secondary">Guardar Cambios</button> 
             <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'agregarAvatar' %}"> Cambiar imagen</a>
-        
+            <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'cambiar_contrasena' %}"> Cambiar Contraseña</a>
+
+        </div>
         
     </section>
     

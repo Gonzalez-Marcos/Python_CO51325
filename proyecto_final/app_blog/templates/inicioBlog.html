@@ -5,6 +5,7 @@
 {% block header %}
 
 <link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+<link href="{% static 'css/blogs.css' %}" rel="stylesheet" />
 
 {% endblock %}
 
@@ -14,39 +15,45 @@
   <div class="container">
     <!--Section: Content-->
     <section class="text-center">
-      <h4 class="mb-5"><strong>Bienvenidos a nuestro BLOG</strong></h4>
+      <h1 class="mb-5"><strong>Bienvenidos a nuestras últimas novedades</strong></h1>
 
       <div class="row">
-        {% for post in posts%}
-        <div class="col-lg-4 col-md-12 mb-4">
-          <div class="card">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="{{ post.imagen.url }}" class="img-fluid" />
-              <a href="#!">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </a>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Post title</h5>
-              <p class="card-text">
-                {{ post.text }}
-              </p>
-              <a href="{% url 'detalleBlog' post.id %}" class="btn btn-primary">Ver</a>
+      {% if posts%}
+          {% for post in posts %}
+          <div class="col-lg-4 col-md-12 mb-4">
+            <div class="card">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <img src="{{ post.imagen.url }}" class="img-fluid img-blog" />
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">{{ post.titulo }}</h4>
+                <p class="card-text">
+                  
+                </p>
+                <a href="{% url 'detalleBlog' post.id %}" class="btn_blog btn btn-primary">Ver detalle</a>
+              </div>
             </div>
           </div>
-        </div>
-        {% endfor %}
+          {% endfor %}
+      {% else %}
+        <h4 class="mb-5"><strong>No hay post aun.</strong></h4>
+      {% endif %}
       </div>
     </section>
     <!--Section: Content-->
 
     <!-- Pagination -->
+{% comment %} {% if page_obj.has_other_pages %}
     <nav class="my-4" aria-label="...">
+      {% if page_obj.has_previous %}
       <ul class="pagination pagination-circle justify-content-center">
         <li class="page-item">
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">Primera Página</a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
         <li class="page-item active" aria-current="page">
           <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
         </li>
@@ -55,8 +62,30 @@
           <a class="page-link" href="#">Next</a>
         </li>
       </ul>
-    </nav>
+    </nav> {% endcomment %}
   </div>
 </main>
 <!--Main layout-->
 {% endblock %}
+
+{% comment %} {% if page_obj.has_other_pages %}
+  <nav>
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">Primera página</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+      {% endif %}
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última página</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %} {% endcomment %}

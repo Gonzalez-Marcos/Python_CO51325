@@ -1,0 +1,74 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<link href="{% static 'css/curso.css' %}" rel="stylesheet" />
+
+<form action="{% url 'listaAlumnos' %}" method="POST" class="form_curso"> {% csrf_token %}
+    <div class="alert alert-success alert-dismissible fade show"  id="alert-success">
+        {{mensaje}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <h3 class="title">Lista de Alumnos</h3>
+
+    <table class="table">
+        <thead class="thead-dark">
+
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">DNI</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alumno in alumnos %}
+            <tr>
+                <td>{{alumno.nombre}}</td>
+                <td>{{alumno.apellido}}</td>
+                <td>{{alumno.dni}}</td>
+
+                <td>
+                    <a class="btn" href="{% url 'editarAlumno' alumno.id %}" id="btn-edit"><i class="bi bi-pencil-square"></i></a>
+                    {% comment %} <a class="btn" href="{% url 'eliminarAlumno' alumno.id %}" id="btn-elim"><i class="bi bi-trash3"></i></a> {% endcomment %}
+                    <a class="btn" onclick="eliminarAlumno( {{alumno.id}} )" id="btn-elim"><i class="bi bi-trash3"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+        <a class="nav-link-curso btn_cur btn btn-secondary" href="{% url 'alumnos' %}"> Agregar Alumnos</a>
+
+
+</form>
+<div class="d-flex justify-content-center">
+    <form action="{% url 'buscarAlumno' %}" method="GET" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Ingrese DNI" aria-label="Buscar" name="dni">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    function eliminarAlumno(id) {
+
+        Swal.fire({
+            "title": "¿Estas seguro?!",
+            "text": "Esta acción no se puede deshacer",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, cancelar",
+            "confirmButtonText": "Si, eliminar",
+            "reverseButtons": true,
+            "confirmButtonColor": "#dc3545"
+        })
+        .then(function(result){
+            if(result.isConfirmed){
+                window.location.href = "/app_proyecto_final/eliminarAlumno/"+id+""
+            }
+        })
+    }
+</script>
+{% endblock %}

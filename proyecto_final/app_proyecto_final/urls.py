@@ -5,38 +5,44 @@ from django.contrib.auth.views import LogoutView
 urlpatterns = [
     
     path('', inicioApp, name = "inicioApp"),
-    path('buscar/', buscar, name = "buscar"),
     path('contacto/', contacto, name = "contacto"),
     path('about/', about, name = "about"),
 
-    path('entregables/', entregables, name = "entregables"),
+    #Salas
+    path('salas/', salas, name = "salas"),
+    path('salas/lista', lista_salas, name = "listaSalas"),
+    path('eliminarSala/<id>', eliminar_sala, name= "eliminarSala"),
+    path('editarSala/<id>', editar_sala, name= "editarSala"),
+    path('buscarSala/', buscarSala, name = "buscarSala"),
 
-    #Cursos
-    path('cursos/', cursos, name = "cursos"),
-    path('cursos/lista', lista_cursos, name = "listaCursos"),
-    path('eliminarCurso/<id>', eliminar_curso, name= "eliminarCurso"),
-    path('editarCurso/<id>', editar_curso, name= "editarCurso"),
+    #Docentes
+    path('docentes/', docentes, name = "docentes"),
+    path('docentes/lista', lista_docentes, name = "listaDocentes"),
+    path('eliminarDocente/<id>', eliminar_docente, name= "eliminarDocente"),
+    path('editarDocente/<id>', editar_docente, name= "editarDocente"),
+    path('buscarDocente/', buscarDocente, name = "buscarDocente"),
 
-    #Profesores
-    path('profesores/', profesores, name = "profesores"),
-    path('profesores/lista', lista_profesores, name = "listaProfesores"),
-    path('eliminarProfesor/<id>', eliminar_profesor, name= "eliminarProfesor"),
-    path('editarProfesor/<id>', editar_profesor, name= "editarProfesor"),
 
-    #Estudiantes
-    path('estudiantes/', estudiantes, name = "estudiantes"),
-    path('estudiantes/lista', lista_estudiantes, name = "listaEstudiantes"),
-    path('eliminarEstudiante/<id>', eliminar_estudiante, name= "eliminarEstudiante"),
-    path('editarEstudiante/<id>', editar_estudiante, name= "editarEstudiante"),
+    #Alumnos
+    path('alumnos/', alumnos, name = "alumnos"),
+    path('alumnos/lista', lista_alumnos, name = "listaAlumnos"),
+    path('eliminarAlumno/<id>', eliminar_alumno, name= "eliminarAlumno"),
+    path('editarAlumno/<id>', editar_alumno, name= "editarAlumno"),
+    path('buscarAlumno/', buscarAlumno, name = "buscarAlumno"),
     
     #Login/Logout/Register
     path('login/', login_request, name = "login"),
     path('register/', register, name = 'register'),
+    path('crearUser/', crearUser, name = 'crearUser'),
     path('logout/', LogoutView.as_view(), name = 'logout'),
     path('editarPerfil/', editarPerfil, name = 'editarPerfil'),
     path('agregarAvatar/', agregarAvatar, name='agregarAvatar'),
+    path('cambiar-contrasena/', cambiar_contrasena, name='cambiar_contrasena'),
 
     #Incripciones y Comentarios
     path('inscripciones/', inscripciones, name = "inscripciones"),
+
+    #Lista Usuarios Registrados
+    path('listaUsuarios/', lista_usuarios, name= "listaUsuarios")
 
 ]

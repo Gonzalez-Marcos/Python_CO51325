@@ -15,28 +15,40 @@
             aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="false">
             <img src="{% static 'assets/inscripciones.png' %}" class="d-block w-50" alt="...">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="inicio-carousel carousel-caption d-none d-md-block">
                 <h5 class="h5">Contacto vía mail </h5>
                 <p class>Implementado sistema de contacto para incripción vía mail.<a class="nav-link active"
                         aria-current="page" href="{% url 'inscripciones' %}">...Ver Más</a></p>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="false">
-            <img src="{% static 'assets/inscripciones.png' %}" class="d-block w-50" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
+            <img src="{% static 'assets/about.png' %}" class="d-block w-50" alt="...">
+            <div class="inicio-carousel carousel-caption d-none d-md-block">
+                <h5>Sector Sobre Mí</h5>
+                <p>Información sobre la web y el creador.<a class="nav-link active" aria-current="page"
+                        href="{% url 'about' %}">...Ver Más</a></p>
             </div>
         </div>
-        <div class="carousel-item">
-            <img src="{% static 'assets/inscripciones.png' %}" class="d-block w-50" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+        <div class="carousel-item" data-bs-interval="false">
+            <img src="{% static 'assets/panel.png' %}" class="d-block w-50" alt="...">
+            <div class="inicio-carousel carousel-caption d-none d-md-block">
+                <h5>Panel para DB</h5>
+                <p>Panel para almacenar datos de la institución
+                </p><a href="{% url 'listaSalas' %}">...Ver Más</a>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="false">
+            <img src="{% static 'assets/novedades.png' %}" class="d-block w-50" alt="...">
+            <div class="inicio-carousel carousel-caption d-none d-md-block">
+                <h5>Sector Novedades</h5>
+                <p>Los usuarios podrán ver las novedades y comentar sobre ellas.
+                </p><a href="{% url 'blog' %}">...Ver Más</a>
             </div>
         </div>
     </div>
